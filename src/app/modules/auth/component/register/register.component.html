@@ -1,0 +1,41 @@
+
+<div class="w-full h-30rem flex justify-content-center align-items-center">
+    <div style="width: 30%;">
+        <p-panel header="{{'label.register' | translate}}">
+            <form class="grid" [formGroup]="formRegister">
+                <div class="p-fluid col sm:col-12 md:col-12">
+                    <label class="font-bold required">
+                        {{'label.user-name' | translate}}
+                    </label>
+                    <input pInputText formControlName="email"/>
+                    <small
+                        class="p-error block fade-in"
+                        *ngIf="controlEmail.invalid && (controlEmail.touched)">
+                        {{ 'messages.error.required-field' | translate}}
+                    </small>
+                </div>
+                <div class="p-fluid col sm:col-12 md:col-12">
+                    <label class="font-bold required">
+                        {{'label.password' | translate}}
+                    </label>
+                    <input pInputText formControlName="password" type="password"/>
+                    <small
+                        class="p-error block fade-in"
+                        *ngIf="controlPassword.invalid && (controlPassword.touched)">
+                        {{ 'messages.error.required-field' | translate}}
+                    </small>
+                </div>
+            </form>
+            <div class="flex justify-content-center">
+                <button 
+                    [disabled]="formRegister.invalid"    
+                    pButton 
+                    label="{{'button.register' | translate}}"
+                    (click)="onRegister()"
+                >
+                </button>
+            </div>
+        </p-panel>
+    </div>
+</div>
+
