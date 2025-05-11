@@ -1,0 +1,98 @@
+<p-toast />
+<p-panel header="{{'label.list-playlist' | translate}}">
+    
+    <p-table
+        [value]="playlists"
+        [rows]="5"
+        [rowsPerPageOptions]="[5,10,15]"
+        responsiveLayout="scroll"
+        [paginator]="true"
+        [lazy]="true"
+        [totalRecords]="totalElement"
+        (onLazyLoad)="eventFetchKnowledgeBases($event)"
+        
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-end">
+                <button 
+                    pButton 
+                    class="p-button-outlined"
+                    icon="pi pi-plus"
+                    label="{{ 'label.add-playlist' | translate }}"
+                    (click)="onCreatePlaylist()"
+                >
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-center" style="width: 30%;">{{'label.name' | translate}}</th>
+                <th class="text-center" style="width: 40%;">{{'label.description' | translate}}</th>
+                <th class="text-center" style="width: 30%;">{{'label.actions' | translate}}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-playlist>
+            <tr>
+                <td class="col-1 text-center">
+                    {{ playlist.name }}
+                </td>
+                <td class="col-1 text-center">
+                    {{ playlist.description }}
+                </td>
+                <td class="col-1 text-center">
+                    <div class="flex gap-2 justify-content-center">
+                        <button 
+                            pButton 
+                            label="{{'button.detail' | translate}}"
+                            icon="pi pi-eye"
+                            (click)="onViewDetailPlaylist(playlist.name)"
+                        >
+                        </button>
+                        <button 
+                            pButton 
+                            label="{{'button.delete' | translate}}"
+                            icon="pi pi-trash"
+                            class="p-button-outlined danger"
+                            (click)="onDeletePlaylist(playlist.name)"
+                        >
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">
+                <div class="p-3 surface-200 w-full text-center">
+                    <b>
+                    {{'messages.no-records' | translate}}
+                    </b>
+                </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>
+<p-confirmDialog
+    #cd
+    header="{{'label.confirmation' | translate}}"
+    icon="pi pi-exclamation-triangle"
+    [closable]="false"
+  >
+    <ng-template pTemplate="footer">
+        <button
+            type="button"
+            class="p-button p-button-outlined p-button-secondary"
+            pButton icon="pi pi-times"
+            label="{{'label.no' | translate}}"
+            (click)="cd.onReject()">
+        </button>
+        <button
+            type="button"
+            pButton
+            icon="pi pi-check"
+            label="{{'label.yes' | translate }}"
+            (click)="cd.onAccept()">
+        </button>
+    </ng-template>
+</p-confirmDialog>

@@ -1,0 +1,48 @@
+{
+  "label": {
+    "list-playlist": "Listas de reproducción",
+    "name": "Nombre",
+    "description": "Descripción",
+    "actions": "Acciones",
+    "detail-playlist":  "Detalle de la lista de reproducción",
+    "title": "Título",
+    "artist": "Artista",
+    "genre": "Género",
+    "year": "Año",
+    "album": "Álbum",
+    "no": "No",
+    "yes": "Si",
+    "confirmation": "Confirmación",
+    "add-playlist": "Crear lista",
+    "songs": "Canciones",
+    "login":"Inicio de sesión",
+    "user-name": "Email",
+    "password": "Contraseña",
+    "register": "Crear cuenta de usuario"
+    
+  },
+  "button": {
+    "detail": "Ver detalle",
+    "back": "Regresar",
+    "delete": "Eliminar",
+    "create": "Crear",
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta",
+    "logout": "Cerrar sesión"
+  },
+  "messages": {
+    "no-songs": "¡No hay canciones en esta playlist!",
+    "no-records": "Sin registros",
+    "playlist-created": "Lista de reproducción creada con exito",
+    "playlist-deleted": "Lista de reproducción eliminada con exito",
+    "account-created": "Cuenta creada con exito",
+    "error-unexpected": "Ocurrio un error inesperado",
+    "confirmation": {
+      "CONFIR001": "Esta seguro que desea eliminar la playlist?"
+    },
+    "error": {
+      "required-field": "Este campo es obligatorio",
+      "ERR001": "Ya existe una lista con ese nombre"
+    }
+  }
+}

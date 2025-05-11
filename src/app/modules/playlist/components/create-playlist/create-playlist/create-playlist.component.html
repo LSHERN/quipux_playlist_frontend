@@ -1,0 +1,101 @@
+<p-panel header="{{'label.add-playlist' | translate}}">
+    <form class="grid" [formGroup]="formPlaylist">
+        <div class="p-fluid col sm:col-12 md:col-6">
+            <label class="font-bold required">
+                {{'label.name' | translate}}
+            </label>
+            <input pInputText formControlName="name"/>
+            <small
+                class="p-error block fade-in"
+                *ngIf="controlName.invalid && (controlName.touched)">
+                  {{ 'messages.error.required-field' | translate}}
+            </small>
+        </div>
+        <div class="p-fluid col sm:col-12 md:col-6">
+            <label class="font-bold required">
+                {{'label.description' | translate}}
+            </label>
+            <input pInputText formControlName="description" />
+            <small
+                class="p-error block fade-in"
+                *ngIf="descriptionControl.invalid && (descriptionControl.touched)">
+                  {{ 'messages.error.required-field' | translate}}
+            </small>
+        </div>
+    </form>
+    <p-divider><strong>{{'label.songs' | translate}}</strong></p-divider>
+    <p-table 
+        [value]="songs"
+        [(selection)]="selectedSongs" 
+        [rows]="5"
+        [totalRecords]="songs.length"
+        responsiveLayout="scroll"
+        [rowsPerPageOptions]="[5,10,15]"
+        [paginator]="true"
+        [lazy]="false"
+    >   
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+                <th class="text-center" style="width: 20%;">{{'label.title' | translate}}</th>
+                <th class="text-center" style="width: 20%;">{{'label.artist' | translate}}</th>
+                <th class="text-center" style="width: 20%;">{{'label.year' | translate}}</th>
+                <th class="text-center" style="width: 20%;">{{'label.album' | translate}}</th>
+                <th class="text-center" style="width: 20%;">{{'label.genre' | translate}}</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-song>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="song" />
+                </td>
+                <td class="col-1 text-center">
+                    {{ song.title }}
+                </td>
+                <td class="col-1 text-center">
+                    {{ song.artist }}
+                </td>
+                <td class="col-1 text-center">
+                    {{ song.year }}
+                </td>
+                <td class="col-1 text-center">
+                    {{ song.album }}
+                </td>
+                <td class="col-1 text-center">
+                    {{ song.genre }}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">
+                <div class="p-3 surface-200 w-full text-center">
+                    <b>
+                    {{'messages.no-records' | translate}}
+                    </b>
+                </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template pTemplate="footer">
+        <div class="flex justify-content-end gap-2">
+            <button 
+                pButton 
+                class="p-button-outlined"
+                icon="pi pi-arrow-left"
+                label="{{'button.back' | translate}}"
+                (click)="onBack()"
+            >
+            </button>
+            <button 
+                [disabled]="formPlaylist.invalid || selectedSongs.length === 0"
+                pButton 
+                icon="pi pi-check"
+                label="{{'button.create' | translate}}"
+                (click)="onCreatePlaylist()"
+            >
+            </button>
+        </div>
+    </ng-template>
+</p-panel>

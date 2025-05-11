@@ -1,0 +1,24 @@
+@import "primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ui-widget {
+    font-family: 'Roboto', sans-serif;
+}
+
+.required::after {
+    content: "*";
+    color: red;
+}
+
+.p-error {
+    color: #f44336; /* o algún otro color rojo/error */
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}

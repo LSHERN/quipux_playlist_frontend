@@ -1,0 +1,37 @@
+<p-panel header="{{'label.detail-playlist' | translate}}">
+    <div *ngIf="detailPlaylist" class="flex justify-content-center">
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="playlist-name">{{detailPlaylist.name}}</h2>
+                <p class="description">{{ detailPlaylist.description }}</p>
+            </div>
+            <p-divider><strong>{{'label.songs' | translate}}</strong></p-divider>
+            <div class="song-list">
+                <div *ngIf="detailPlaylist.songs.length === 0">
+                    <p class="no-songs-message">{{'messages.no-songs' | translate}}</p>
+                </div>
+                <div class="song" *ngFor="let song of detailPlaylist.songs">
+                    <div class="song-info">
+                        <p><strong>{{ 'label.title' | translate }}:</strong> {{ song.title }}</p>
+                        <p><strong>{{ 'label.artist' | translate }}:</strong> {{ song.artist }}</p>
+                        <p><strong>{{ 'label.genre' | translate }}:</strong> {{ song.genre }}</p>
+                        <p><strong>{{ 'label.year' | translate }}:</strong> {{ song.year }}</p>
+                        <p><strong>{{ 'label.album' | translate }}:</strong> {{ song.album }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-content-center mt-3">
+                <button 
+                    pButton 
+                    label="{{'button.back' | translate }}"
+                    class="p-button-outlined" 
+                    icon="pi pi-arrow-left"
+                    (click)="onBack()"
+                >
+                </button>
+            </div>
+        </div>
+    </div>
+</p-panel>
+

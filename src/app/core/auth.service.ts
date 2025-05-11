@@ -12,7 +12,7 @@ import { LoginRequest, LoginResponse, RegisterRequest } from '../shared/models/a
 })
 export class AuthService {
 
-  private PATH_ROOT = 'auth';  
+  private PATH_ROOT = 'authentication';  
 
   constructor(private http: HttpClient, private utilService: UtilService) {}
 

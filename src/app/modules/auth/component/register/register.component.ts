@@ -4,12 +4,16 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/auth.service';
 import { UtilService } from '../../../../shared/services/util.service';
 import { LoginResponse, RegisterRequest } from '../../../../shared/models/auth.models';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { PrimeNgModule } from '../../../../shared/modules/primeng/primeng.module';
 
 @Component({
   selector: 'app-register',
-  imports: [],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  imports: [CommonModule,
+    PrimeNgModule,
+    TranslateModule,],
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
    formRegister: FormGroup;
@@ -20,7 +24,7 @@ export class RegisterComponent {
     private utilService: UtilService,
   ) {
     this.formRegister = this.fb.group({
-      email: ["", Validators.required, Validators.email],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
     });
   }

@@ -1,30 +1,33 @@
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 import { inject } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
-import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const messageService = inject(MessageService);
-  const translateService = inject(TranslateService);
+  // Inject the current AuthService and use it to get an authentication token:
+  const router = inject(Router);
+  const authToken =  getAuthToken();
 
-  const token = sessionStorage.getItem('authToken');
-
-  const authReq = req.clone({
-    setHeaders: token ? { Authorization: Bearer ${token} } : {},
-    withCredentials: true
+  // Clone the request to add the authentication header.
+  if(!authToken){
+    return next(req);
+  }
+  const authRequest = req.clone({
+    headers: req.headers.set('Authorization', `Bearer ${authToken}`)
   });
 
-  return next(req).pipe(
-      catchError((error: HttpErrorResponse) => {
-        const errorCustom: any = error.error;
-        messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: translateService.instant(messages.error.${errorCustom.codeError ?? 'admin-error'}),
-          life: 3000
-        });
-        return throwError(() => error);
-      })
-    );
-};
+  return next(authRequest);
+}
+
+function getAuthToken(): string | null {
+    const router = inject(Router);
+    const token: string | null = localStorage.getItem('authToken');
+    const urlSegments = router.url.split('/');
+    const lastPartUrl = urlSegments[urlSegments.length - 1];
+    if (!token && lastPartUrl !== "register") {
+      router.navigate(['auth', 'login']);
+
+    }
+    return token;
+  }

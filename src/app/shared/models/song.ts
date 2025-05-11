@@ -1,7 +1,3 @@
-export type ResponseFetchAllSongs = {
-    songs: Song[]
-}
-
 export type Song = {
     id?: number;
     title: string;

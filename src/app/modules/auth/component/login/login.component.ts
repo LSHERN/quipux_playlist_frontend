@@ -2,12 +2,18 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest, LoginResponse } from '../../../../shared/models/auth.models';
 import { AuthService } from '../../../../core/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { PrimeNgModule } from '../../../../shared/modules/primeng/primeng.module';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  imports:[CommonModule,
+    PrimeNgModule,
+    TranslateModule,
+  RouterModule]
 })
 export class LoginComponent {
 formLogin: FormGroup;
@@ -28,7 +34,7 @@ formLogin: FormGroup;
       next:(response: LoginResponse | null) => {
         if (response) {
           this.authService.saveToken(response.token);
-          this.router.navigate(['']);
+          this.router.navigate(['playlist']);
         }
       }
     });
